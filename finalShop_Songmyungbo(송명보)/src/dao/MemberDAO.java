@@ -20,13 +20,13 @@ public class MemberDAO {
 
     int idx = 0;
     List<Member> mList = new ArrayList<>();
-    private Map<String, List<Item>> memberCarts = new HashMap<>(); // 각 회원의 장바구니 관리
-    private String logInMemberId; // 현재 로그인된 회원의 ID를 추적
+    private Map<String, List<Item>> memberCarts = new HashMap<>(); 
+    private String logInMemberId; 
 
     public boolean insertMember(String id, String pw, String name) {
         Member member = new Member(id, pw, name);
         mList.add(member);
-        memberCarts.put(id, new ArrayList<>()); // 회원 생성 시 장바구니도 초기화
+        memberCarts.put(id, new ArrayList<>()); 
         if(!id.equals("admin")) {
             System.out.println(member);
         }
@@ -37,7 +37,7 @@ public class MemberDAO {
     public String isValidMember(String id, String pw) {
         for (int i = 0; i < mList.size(); i++) {
             if (mList.get(i).getId().equals(id) && mList.get(i).getPw().equals(pw)) {
-            	logInMemberId = id; // 로그인한 회원 ID 저장
+            	logInMemberId = id; 
                 return id;
             }
         }
@@ -90,12 +90,11 @@ public class MemberDAO {
 
         for (Item cartItem : cartItems) {
             if (cartItem.getItemName().equals(item.getItemName())) {
-                cartItem.setNumInCart(cartItem.getNumInCart() + num); // 수량 업데이트
+                cartItem.setNumInCart(cartItem.getNumInCart() + num); 
                 return;
             }
         }
 
-        // 새 아이템 추가
         item.setNumInCart(num);
         cartItems.add(item);
     }

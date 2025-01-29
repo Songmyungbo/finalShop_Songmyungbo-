@@ -20,7 +20,6 @@ public class MemberCart implements MenuCommand {
 
     @Override
     public boolean update() {
-        // 로그인된 회원 ID를 가져옴
         String loggedInMemberId = MemberDAO.getInstance().getMemberId();
 
         if (loggedInMemberId == null) {
@@ -29,16 +28,12 @@ public class MemberCart implements MenuCommand {
             return false;
         }
 
-        // 로그인된 회원의 장바구니 아이템 목록을 가져옴
         List<Item> cartItems = MemberDAO.getInstance().getCartItems(loggedInMemberId);
 
-        // 장바구니 내용 출력
         printCart(cartItems);
 
-        // 메뉴 표시
         System.out.println("[1] 쇼핑하기\n[2] 뒤로가기\n[0] 종료");
 
-        // 사용자 입력 처리
         int sel = Util.getValue("메뉴 선택 ", 0, 2);
         if (sel == 1) {
             cont.setNext("MemberShopping");
@@ -46,13 +41,12 @@ public class MemberCart implements MenuCommand {
             cont.setNext("MemberMain");
         } else if (sel == 0) {
             System.out.println("프로그램을 종료합니다.");
-            cont.setNext(null); // 프로그램 종료
+            cont.setNext(null); 
         }
 
-        return false; // 프로그램 계속 실행
+        return false; 
     }
 
-    // 장바구니 내용 출력
     private void printCart(List<Item> cartItems) {
         System.out.println("=====================");
         if (cartItems.isEmpty()) {
@@ -63,7 +57,7 @@ public class MemberCart implements MenuCommand {
             int index = 1;
 
             for (Item item : cartItems) {
-                int itemTotalPrice = item.getPrice() * item.getNumInCart(); // numInCart 반영
+                int itemTotalPrice = item.getPrice() * item.getNumInCart(); 
                 totalCount += item.getNumInCart();
                 totalPrice += itemTotalPrice;
 

@@ -85,7 +85,7 @@ public class MallController {
 		}
 	}
 	public void goToMemberBoard() {
-	    mapCont.put("MemberBoard", new MemberBoard(getLoginId()));  // 로그인 ID가 제대로 설정된 후에 객체 생성
+	    mapCont.put("MemberBoard", new MemberBoard(getLoginId()));  
 	    setNext("MemberBoard");
 	}
 

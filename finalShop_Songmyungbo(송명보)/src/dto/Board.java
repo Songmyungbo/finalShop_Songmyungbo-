@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Board {
-    private static int num;  // 게시글 번호 생성용
-    private int boardNum;    // 게시글 번호
-    private String title;    // 게시글 제목
-    private String id;       // 작성자 ID
-    private String date;     // 작성일
-    private String contents; // 게시글 내용
-    private int hits;        // 조회수
+    private static int num;  
+    private int boardNum;   
+    private String title;    
+    private String id;       
+    private String date;     
+    private String contents; 
+    private int hits;       
 
-    // 날짜 포맷 (yyyy-MM-dd)
+    
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static int getNum() {
@@ -71,14 +71,13 @@ public class Board {
         this.hits = hits;
     }
 
-    // 생성자
     public Board(String title, String id, String contents) {
-        this.boardNum = ++num;  // 게시글 번호 증가
+        this.boardNum = ++num; 
         this.title = title;
         this.id = id;
-        this.date = LocalDate.now().format(formatter);  // 현재 날짜로 설정
+        this.date = LocalDate.now().format(formatter);
         this.contents = contents;
-        this.hits = 0;  // 기본 조회수는 0
+        this.hits = 0; 
     }
     public Board(int boardNum, String title,String id ,String contents, String date,int hits) {
         this.boardNum = boardNum;

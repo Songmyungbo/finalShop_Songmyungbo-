@@ -16,33 +16,30 @@ public class BoardDAO {
 
     List<Board> bList = new ArrayList<Board>();
 
-    // 현재 페이지 상태
-    private int currentPage = 1;  // 현재 페이지 번호
-    private final int postsPerPage = 5;  // 한 페이지에 보여줄 게시글 수
+    private int currentPage = 1;  
+    private final int postsPerPage = 5;  
 
-    // 게시글 추가
     public void addBoard(String loginUserId) {
         String title = Util.getValue("제목");
         String contents = Util.getValue("내용");
 
-        // 로그인된 ID로 작성자 설정
         bList.add(new Board(title, loginUserId, contents));
         System.out.println("게시글이 추가되었습니다.");
     }
     
-    // 게시글 조회
+   
     public void showBoard() {
-        int totalPosts = bList.size();  // 전체 게시글 수
-        int totalPages = (int) Math.ceil((double) totalPosts / postsPerPage);  // 전체 페이지 개수
+        int totalPosts = bList.size();  
+        int totalPages = (int) Math.ceil((double) totalPosts / postsPerPage);  
 
-        int startRow = (currentPage - 1) * postsPerPage;  // 현재 페이지의 시작 게시글 번호
-        int endRow = startRow + postsPerPage;  // 현재 페이지의 끝 게시글 번호
+        int startRow = (currentPage - 1) * postsPerPage;  
+        int endRow = startRow + postsPerPage;  
 
         System.out.printf("총 게시글 %d개\n", totalPosts);
         System.out.printf("현재페이지 [%d / %d]\n", currentPage, totalPages);
 
         if (totalPosts > 0) {
-            // 현재 페이지에 해당하는 게시글 출력
+            
             for (int i = startRow; i < endRow; i++) {
             	if(i >= totalPosts) {
             		break;
@@ -53,7 +50,7 @@ public class BoardDAO {
             }
         } else {
             System.out.println("게시글이 없습니다.");
-            return;  // 게시글이 없으면 메소드 종료
+            return;  
         }
 
         // 페이지 네비게이션
@@ -62,14 +59,14 @@ public class BoardDAO {
         if (sel == 1) {
             if (currentPage > 1) {
                 currentPage--;
-                showBoard();  // 이전 페이지 출력
+                showBoard();  
             } else {
                 System.out.println("이전페이지가 존재하지 않습니다.");
             }
         } else if (sel == 2) {
             if (currentPage < totalPages) {
                 currentPage++;
-                showBoard();  // 다음 페이지 출력
+                showBoard();  
             } else {
                 System.out.println("다음페이지가 존재하지 않습니다.");
             }
@@ -78,7 +75,6 @@ public class BoardDAO {
                 int postNumber = Util.getValue("게시글 번호", 1, totalPosts);
                 Board selectedBoard = bList.get(postNumber - 1);
 
-                // 조회수 증가
                 selectedBoard.setHits(selectedBoard.getHits() + 1);
 
                 System.out.println("게시글 제목: " + selectedBoard.getTitle());
@@ -90,12 +86,11 @@ public class BoardDAO {
         }
     }
 
-    // 내 게시글 목록 출력 (로그인된 사용자의 게시글만)
     public void showMyPosts(String loginUserId) {
         boolean found = false;
         System.out.println("======[ 내 게시글 목록 ]======");
         for (Board board : bList) {
-            if (board.getId().equals(loginUserId)) {  // 작성자 ID가 로그인된 ID와 일치하는 게시글만
+            if (board.getId().equals(loginUserId)) {  
             	System.out.println(board);
                 found = true;
             }
@@ -113,12 +108,12 @@ public class BoardDAO {
         }
     }
 
-    // 게시글 삭제 (본인 게시글만)
+    
     public void deleteBoard(String loginUserId) {
         int postNumber = Util.getValue("삭제할 게시글 번호 입력 ", 1, bList.size());
 
         Board board = bList.get(postNumber - 1);
-        if (board.getId().equals(loginUserId)) {  // 본인 게시글만 삭제 가능
+        if (board.getId().equals(loginUserId)) {  
             bList.remove(postNumber - 1);
             System.out.println("게시글이 삭제되었습니다.");
             return;

@@ -107,7 +107,7 @@ public class ItemDAO {
 	}
 	private void updateItemNumbers() {
 	    for (int i = 0; i < itemList.size(); i++) {
-	        itemList.get(i).setItemNum(i + 1); // 리스트 순서에 맞게 번호 재설정
+	        itemList.get(i).setItemNum(i + 1); 
 	    }
 	}
 	
@@ -121,7 +121,6 @@ public class ItemDAO {
 	          return;
 	        }
 
-	        // 판매량을 기준으로 내림차순 정렬
 	        itemList.sort(Comparator.comparingInt(Item::getSoldCount).reversed());
 
 	        System.out.println("========== 판매된 아이템 목록 ===========");

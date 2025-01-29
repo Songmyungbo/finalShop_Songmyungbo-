@@ -12,7 +12,7 @@ public class MemberInfo implements MenuCommand {
     public void init() {
         cont = MallController.getInstance();
         System.out.println("==========[ 내 정보 ]==========");
-        showUserInfo(); // 사용자 정보 출력
+        showUserInfo(); 
     }
 
     @Override
@@ -39,13 +39,10 @@ public class MemberInfo implements MenuCommand {
         String loginUserId = cont.getLoginId();
         MemberDAO memberDAO = MemberDAO.getInstance();
 
-        // 현재 비밀번호 입력
         String currentPassword = Util.getValue("패스워드 ");
         
-        // 새 비밀번호 입력
         String newPassword = Util.getValue("신규 패스워드 ");
 
-        // 비밀번호 변경
         if (memberDAO.changePassword(loginUserId, currentPassword, newPassword)) {
             System.out.println("비밀번호 변경완료");
         } else {

@@ -1,19 +1,14 @@
 package menu_member;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import _mall.MenuCommand;
 import controller.MallController;
 import dao.CartDAO;
 import dao.ItemDAO;
-import dao.MemberDAO;
 import dto.Item;
-import dto.Member;
 import util.Util;
 
 public class MemberShopping implements MenuCommand {
@@ -58,7 +53,6 @@ public class MemberShopping implements MenuCommand {
             if (sel == 0) {
                 cont.setNext("MemberMain");
             } else if (sel >= 1 && sel <= itemList.size()) {
-                // 선택한 카테고리만 해당하는 아이템 목록 출력
                 String selectedCategory = CartDAO.getInstance().getCategoryByIndex(sel, itemList);
                 List<Item> selectedItems = CartDAO.getInstance().getItemsByCategory(selectedCategory, itemList);
 				CartDAO.getInstance().printItemList(selectedItems);

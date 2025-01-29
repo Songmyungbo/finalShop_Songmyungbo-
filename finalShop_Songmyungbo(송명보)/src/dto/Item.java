@@ -8,14 +8,14 @@ public class Item {
 	private int price;
 	private static int itemNumber = 0;
 	private int numInCart;
-	private int soldCount; // 판매수
+	private int soldCount; 
 
 
 	public int getSoldCount() {
 		return soldCount;
 	}
 	public void setSoldCount(int quantity) {
-        this.soldCount += quantity; // 판매량 증가
+        this.soldCount += quantity;
     }
 	
 	public static int getNum() {

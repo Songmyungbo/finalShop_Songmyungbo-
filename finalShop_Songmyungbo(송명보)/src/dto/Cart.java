@@ -2,13 +2,13 @@ package dto;
 
 public class Cart {
     private static int num;
-    private int cartNum;  // 장바구니 항목 고유 번호
-    private String memberId; // 사용자 ID
-    private Item item;       // 장바구니에 담긴 아이템 (Item 객체)
-    private int quantity;    // 아이템 수량
+    private int cartNum; 
+    private String memberId; 
+    private Item item;       
+    private int quantity;    
     private int itemNum;
 
-    // 생성자
+  
     public Cart(String memberId, Item item, int quantity) {
         this.cartNum = ++num;
         this.memberId = memberId;

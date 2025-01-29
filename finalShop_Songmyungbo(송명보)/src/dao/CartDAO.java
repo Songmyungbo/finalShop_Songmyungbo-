@@ -21,12 +21,12 @@ public class CartDAO {
 	 public void addCart(String memberId, Item item, int quantity) {
 	        Cart cart = new Cart(memberId, item, quantity);
 	        cList.add(cart);
-	        item.setSoldCount(quantity);  // 판매 수량 증가
+	        item.setSoldCount(quantity);  
 	    }
 	
 	
 	
-	// 카테고리 번호에 해당하는 카테고리 이름을 반환
+	
     public String getCategoryByIndex(int index, List<Item> itemList) {
         Set<String> categorySet = new HashSet<>();
         for (Item item : itemList) {
@@ -34,10 +34,10 @@ public class CartDAO {
         }
 
         List<String> categories = new ArrayList<>(categorySet);
-        return categories.get(index - 1);  // 번호는 1부터 시작하므로 -1
+        return categories.get(index - 1);  
     }
 
-    // 카테고리에 맞는 아이템 목록을 반환
+   
     public List<Item> getItemsByCategory(String category, List<Item> itemList) {
         List<Item> selectedItems = new ArrayList<>();
         for (Item item : itemList) {
@@ -48,14 +48,14 @@ public class CartDAO {
         return selectedItems;
     }
 
-    // 아이템 목록을 출력
+ 
     public void printItemList(List<Item> selectedItems) {
         if (selectedItems.isEmpty()) {
             System.out.println("선택된 카테고리에는 아이템이 없습니다.");
             return;
         }
 
-        // 카테고리 이름 출력
+   
         System.out.printf("[%s의 아이템 목록]\n", selectedItems.get(0).getCategoryName());
         int num = 1;
         for (Item item : selectedItems) {
