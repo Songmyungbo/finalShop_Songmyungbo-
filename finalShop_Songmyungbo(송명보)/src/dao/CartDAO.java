@@ -83,7 +83,6 @@ public class CartDAO {
                 MemberDAO.getInstance().addItemToCart(loginUserId, selectedItem, itemCnt);
                 addCart(loginUserId, selectedItem, itemCnt);
                 System.out.printf("[ %s %d개 구매 완료\n", itemName, itemCnt);
-                selectedItem.setSoldCount(itemCnt);
                 break;
             } else {
                 System.out.println("로그인된 회원이 없습니다.");
@@ -97,14 +96,14 @@ public class CartDAO {
 	}
 	
 	public void setLoadData(String data) {
-		if(data == null) {
+		if(data.equals("")) {
 			System.out.println("저장을 먼저하세요!");
 			return;
 		}
 		String[] info = data.split("\n");
 		for(int i = 0; i < info.length; i++) {
 			String[] temp = info[i].split("/");
-			cList.add(new Cart(Integer.parseInt(temp[0]),temp[1],Integer.parseInt(temp[2]),Integer.parseInt(temp[3])));
+			cList.add(new Cart(Integer.parseInt(temp[0]),temp[1],Integer.parseInt(temp[3]),ItemDAO.getInstance().getItemByNum(Integer.parseInt(temp[2]))));
 		}
 	}
 	
@@ -115,7 +114,7 @@ public class CartDAO {
 		}
 		String data = "";
 		for(Cart c : cList){
-			data += String.format("%d/%s/%d/%d/%d\n",c.getCartNum(),c.getMemberId(),c.getItem().getItemNum(),c.getQuantity());
+			data += String.format("%d/%s/%d/%d\n",c.getCartNum(),c.getMemberId(),c.getItem().getItemNum(),c.getQuantity());
 		}
 		return data.substring(0,data.length()-1);
 		

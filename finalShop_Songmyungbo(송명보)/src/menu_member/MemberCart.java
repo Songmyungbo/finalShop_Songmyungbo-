@@ -4,7 +4,9 @@ import java.util.List;
 
 import _mall.MenuCommand;
 import controller.MallController;
+import dao.CartDAO;
 import dao.MemberDAO;
+import dto.Cart;
 import dto.Item;
 import util.Util;
 
@@ -28,9 +30,9 @@ public class MemberCart implements MenuCommand {
             return false;
         }
 
-        List<Item> cartItems = MemberDAO.getInstance().getCartItems(loggedInMemberId);
+        List<Cart> cartList = CartDAO.getInstance().getCartList();
 
-        printCart(cartItems);
+        printCart(cartList,loggedInMemberId);
 
         System.out.println("[1] 쇼핑하기\n[2] 뒤로가기\n[0] 종료");
 
@@ -47,26 +49,30 @@ public class MemberCart implements MenuCommand {
         return false; 
     }
 
-    private void printCart(List<Item> cartItems) {
+    private void printCart(List<Cart> cartList,String loggedInMemberId) {
         System.out.println("=====================");
-        if (cartItems.isEmpty()) {
+        if (cartList.isEmpty()) {
             System.out.println("구매 내역이 없습니다.");
         } else {
             int totalCount = 0;
             int totalPrice = 0;
             int index = 1;
 
-            for (Item item : cartItems) {
-                int itemTotalPrice = item.getPrice() * item.getNumInCart(); 
-                totalCount += item.getNumInCart();
+            for (Cart cart : cartList) {
+            	 Item item = cart.getItem();
+            	 if(item == null)continue;
+            	 if(cart.getMemberId().equals(loggedInMemberId)) {
+                int itemTotalPrice = item.getPrice() * cart.getQuantity(); 
+                totalCount += cart.getQuantity(); 
                 totalPrice += itemTotalPrice;
-
                 System.out.printf("[%d] %s(%d원) %d개 총 %d원\n",
-                        index++, item.getItemName(), item.getPrice(), item.getNumInCart(), itemTotalPrice);
-            }
+                        index++, item.getItemName(), item.getPrice(), cart.getQuantity(), itemTotalPrice);
+                	}
+                }
 
             System.out.println("=====================");
             System.out.printf("총 %d개 (%d원)\n", totalCount, totalPrice);
         }
     }
 }
+

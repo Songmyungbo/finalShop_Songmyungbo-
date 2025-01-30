@@ -31,10 +31,11 @@ public class Cart {
     public int getQuantity() {
         return quantity;
     }
-    public Cart(int cartNum, String memberId, int ItemNum, int quantity) {
+    public Cart(int cartNum, String memberId, int quantity , Item item) {
         this.cartNum = cartNum;
         this.memberId = memberId;
         this.quantity = quantity;
+        this.item = item;
     }
 
     @Override

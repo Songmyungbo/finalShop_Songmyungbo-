@@ -9,6 +9,7 @@ import java.util.Map;
 import dto.Cart;
 import dto.Item;
 import dto.Member;
+import util.Util;
 
 public class MemberDAO {
     
@@ -139,7 +140,7 @@ public class MemberDAO {
 	    }
 	}
 	public void setLoadData(String data) {
-		if(data == null) {
+		if(data.equals("")) {
 			System.out.println("저장을 먼저하세요!");
 			return;
 		}
@@ -160,6 +161,58 @@ public class MemberDAO {
 			data += String.format("%d/%s/%s/%s\n", m.getMemberNum(),m.getId(),m.getPw(),m.getMemberName());
 		}
 		return data.substring(0,data.length()-1);
+	}
+	
+	public void delMember() {
+		List<Member> mList = MemberDAO.getInstance().getMemberList();
+		if(listCheck(mList)) {
+			printMemberList();
+			String id = Util.getValue("삭제 할 회원 아이디 ");
+			if(id.equals("admin")) {
+				System.out.println("관리자 회원 삭제 불가능");
+				return;
+			}else {
+				delId(id);
+				return;
+			}
+		}else {
+			return;
+		}
+	}
+	
+	private void delId(String id) {
+		int idx = -1;
+		for(int i = 0; i < mList.size();i++) {
+			if(id.equals(mList.get(i).getId())) {
+				idx = i;
+			}
+		}
+		if(idx != -1) {
+			mList.remove(idx);
+			System.out.println("회원 삭제완료");
+		}else {
+			System.out.println("삭제 실패");
+		}
+		return;
+	}
+	private boolean listCheck(List<Member> mList) {
+		if(mList.isEmpty()) {
+			System.out.println("회원 목록이 비어있습니다!");
+			return false;
+		}
+		return true;
+	}
+	
+	public void printMemberList() {
+		if(listCheck(mList)) {
+			System.out.println("=====[ 회원 목록 ]=====");
+			for(Member m : mList) {
+				System.out.println(m);
+			}
+		}else {
+			return;
+		}
+		
 	}
 
 

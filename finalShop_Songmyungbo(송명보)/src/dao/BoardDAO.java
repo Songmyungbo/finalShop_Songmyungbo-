@@ -139,7 +139,7 @@ public class BoardDAO {
 	}
 	
 	public void setLoadData(String data) {
-		if(data == null) {
+		if(data.equals("")) {
 			System.out.println("저장을 먼저하세요!");
 			return;
 		}

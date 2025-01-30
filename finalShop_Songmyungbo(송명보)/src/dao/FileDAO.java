@@ -84,7 +84,7 @@ public class FileDAO {
 			System.out.println("데이터 로드 실패");
 		}
 		
-		return null;
+		return data;
 	}
 
 }
