@@ -1,20 +1,11 @@
 package dao;
 
 import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
-import controller.MallController;
-import dto.Board;
-import dto.Cart;
-import dto.Item;
-import dto.Member;
 
 public class FileDAO {
 	private static final String FILE_PATH = System.getProperty("user.dir") + "\\src\\files\\";
