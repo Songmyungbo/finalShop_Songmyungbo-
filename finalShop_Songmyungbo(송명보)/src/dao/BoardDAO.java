@@ -53,7 +53,6 @@ public class BoardDAO {
             return;  
         }
 
-        // 페이지 네비게이션
         System.out.println("[1]이전\n[2]이후\n[3]게시글보기[0]종료");
         int sel = Util.getValue("메뉴", 0, 3);
         if (sel == 1) {
