@@ -1,6 +1,7 @@
 package menu_member;
 
 import _mall.MenuCommand;
+
 import controller.MallController;
 import dao.BoardDAO;
 import util.Util;
